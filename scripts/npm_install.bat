@@ -9,8 +9,7 @@ if not exist "node-red/node_modules" (
     cd ./node-red
     call "%~dp0../node/npm.cmd" install
     echo Finished npm install
-)
-else (
+) else (
     echo node_modules already available
 )
 
