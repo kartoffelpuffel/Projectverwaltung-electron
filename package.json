@@ -3,6 +3,9 @@
     "start": "electron main.js"
   },
   "dependencies": {
-    "electron": "^38.1.0"
+    "@flowfuse/node-red-dashboard": "^1.27.0",
+    "electron": "^38.1.0",
+    "express": "^5.1.0",
+    "node-red": "^4.1.0"
   }
 }
