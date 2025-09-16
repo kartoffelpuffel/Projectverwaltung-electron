@@ -4,7 +4,7 @@ const express = require("express");
 const RED = require("node-red");
 
 const expressApp = express();
-const server = http.createServer(app);
+const server = http.createServer(expressApp);
 
 const settings = {
   httpAdminRoot: "/", 
@@ -23,6 +23,7 @@ app.whenReady().then(() => {
             nodeIntegration: true
         }
     });
+    window.maximize()
 
     RED.init(server, settings);
 

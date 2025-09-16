@@ -10,6 +10,17 @@
     "express": "^5.1.0",
     "node-red": "^4.1.0"
   },
+  "build": {
+    "extraResources": [
+      {
+        "from": "userDir/",
+        "to": "userDir/",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  },
   "devDependencies": {
     "electron": "^38.1.0"
   }

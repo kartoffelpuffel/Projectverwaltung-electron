@@ -263,7 +263,8 @@
         "y": 180,
         "wires": [
             [
-                "ba60cb4eb08b0faf"
+                "ba60cb4eb08b0faf",
+                "53486fab5c7395a6"
             ]
         ]
     },
@@ -305,7 +306,7 @@
         "type": "file",
         "z": "3e89576f4214a9fa",
         "name": "project.json",
-        "filename": "userDir/project.json",
+        "filename": "./userDir/project.json",
         "filenameType": "str",
         "appendNewline": true,
         "createDir": true,
@@ -349,7 +350,7 @@
         "type": "file in",
         "z": "3e89576f4214a9fa",
         "name": "project.json",
-        "filename": "userDir/project.json",
+        "filename": "./userDir/project.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
@@ -453,7 +454,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 520,
-        "y": 180,
+        "y": 220,
         "wires": []
     },
     {
@@ -461,7 +462,7 @@
         "type": "debug",
         "z": "3e89576f4214a9fa",
         "name": "debug 3",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -497,7 +498,7 @@
         "type": "debug",
         "z": "3e89576f4214a9fa",
         "name": "debug 4",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -546,7 +547,7 @@
         "type": "debug",
         "z": "3e89576f4214a9fa",
         "name": "debug 7",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -718,7 +719,7 @@
         "head": "",
         "format": "<template>\n    <v-text-field \n    v-model=\"search\" \n    label=\"Search\" \n    prepend-inner-icon=\"mdi-magnify\" \n    single-line \n    variant=\"outlined\"\n    hide-details\n    >\n    </v-text-field>\n\n  <v-data-table\n  v-model=\"selected\"\n  v-model:expanded=\"expanded\"\n  v-model:search=\"search\"\n  :headers=\"tasks\"\n  :items=\"projects\"\n  item-value=\"projektname\"\n  show-expand\n  show-select\n  @change=\"sendProgress\"\n  >\n  <template v-slot:top>\n    <v-toolbar flat>  \n      <v-btn class=\"me-2\" prepend-icon=\"mdi-delete\" rounded=\"lg\" text=\"Auswahl löschen\" border @click=\"handleClick\"></v-btn>\n    </v-toolbar>\n  </template>\n\n    <!-- Fortschritt -->\n    <template v-slot:item.progress=\"{ item }\">\n      <v-progress-linear\n        :model-value=\"item.progress\"\n        height=\"20\"\n        color=\"primary\"\n        max=100\n        rounded\n      >\n        <strong>{{ item.progress }}%</strong>\n      </v-progress-linear>\n    </template>\n\n    <template v-slot:item.actions=\"{ item }\">\n      <v-btn icon=\"mdi-pencil\" @click=\"editItem(item)\"></v-btn>\n    </template>\n\n\n    <!-- Subtasks sichtbar beim Aufklappen -->\n    <template v-slot:expanded-row=\"{ columns, item }\">\n      <td :colspan=\"columns.length\">\n        <ul>\n          <li v-for=\"(sub, index) in item.subtasks\" :key=\"index\">\n            <v-checkbox @update:modelValue=\"$emit('sendProgress')\" v-model=\"sub.done\" :label=\"sub.title\"></v-checkbox>\n          </li>\n        </ul>\n      </td>\n    </template>\n\n    </v-data-table>\n\n\n    <v-dialog v-model=\"dialog\" max-width=\"600px\">\n    <v-card>\n      <v-card-title>\n        <span class=\"text-h6\">Projekt bearbeiten</span>\n      </v-card-title>\n\n      <v-card-text>\n        <v-text-field v-model=\"editedItem.projektname\" label=\"Projektname\"></v-text-field>\n        <v-text-field v-model=\"editedItem.beschreibung\" label=\"Beschreibung\"></v-text-field>\n      </v-card-text>\n\n      <v-card-actions>\n        <v-spacer></v-spacer>\n        <v-btn text=\"Abbrechen\" @click=\"closeDialog\"></v-btn>\n        <v-btn color=\"primary\" text=\"Speichern\" @click=\"saveItem\"></v-btn>\n      </v-card-actions>\n    </v-card>\n    </v-dialog>\n</template>\n\n\n\n<script>\n  export default {\n    data () {\n      return {\n        search:'',\n        dialog: false,\n        editedIndex: -1,\n        editedItem: {},\n        selected: [],\n        expanded: [],\n        tasks: [\n          {title: 'Projektname', align: 'start',key: 'projektname'},\n          {title:'Beschreibung', key:'beschreibung'},\n          {title:'Fortschritt', key:'progress', value:'progress'},\n          {title:'', key: 'data-table-expand' },\n          {title: \"Bearbeiten\", align: 'end', key: \"actions\", sortable: false },\n        ],\n        projects: [],\n      }\n    },\n    watch:{\n      msg: {\n        handler(newMsg){\n          this.projects = newMsg.payload.map(task => ({\n            ...task,\n            progress: this.getProgress(task)\n          }))\n        }\n      }\n    },\n    methods: {\n      getProgress(task) {\n        if (!task.subtasks || task.subtasks.length === 0) return 0;\n        const done = task.subtasks.filter(s => s.done).length;\n        return Math.round((done / task.subtasks.length) * 100);\n      },\n      sendProgress() {\n        this.projects = this.projects.map(task => ({\n          ...task,\n          progress: this.getProgress(task)\n        }))\n\n        this.send({\n          payload: this.projects\n        });\n      },\n      deleteItem(){\n        for(var i = 0; i <this.selected.length; i++){\n          const index = this.projects.map(projekt => projekt.projektname).indexOf(this.selected[i]);\n          if(index >= 0) this.projects.splice(index, 1);\n        }\n        this.sendProgress();\n      },\n      handleClick(){\n        this.deleteItem();\n        this.sendProgress();\n      },\n      editItem(item) {\n        this.editedIndex = this.projects.indexOf(item)\n        this.editedItem = { ...item }\n        this.dialog = true\n      },\n      closeDialog() {\n        this.dialog = false\n        this.editedItem = {}\n        this.editedIndex = -1\n      },\n      saveItem() {\n        if (this.editedIndex > -1) {\n          Object.assign(this.projects[this.editedIndex], this.editedItem)\n        }\n        this.send({ payload: this.projects }) // Änderungen an Node-RED zurück\n        this.closeDialog()\n      },\n    }\n  }\n</script>",
         "storeOutMessages": true,
-        "passthru": false,
+        "passthru": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
@@ -912,10 +913,23 @@
         ]
     },
     {
+        "id": "53486fab5c7395a6",
+        "type": "ui-control",
+        "z": "3e89576f4214a9fa",
+        "name": "",
+        "ui": "c0b5322d72aa242a",
+        "events": "all",
+        "x": 520,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "79e2190a.9bb55",
         "type": "exec",
         "z": "84335037.da5f6",
-        "command": "taskkill /IM msedge.exe /F && taskkill /F /IM node.exe",
+        "command": "taskkill /F /IM node.exe",
         "addpay": false,
         "append": "",
         "useSpawn": "false",
@@ -923,7 +937,7 @@
         "winHide": false,
         "oldrc": false,
         "name": "",
-        "x": 880,
+        "x": 780,
         "y": 380,
         "wires": [
             [],
