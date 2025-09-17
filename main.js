@@ -25,7 +25,7 @@ app.whenReady().then(() => {
     });
     window.maximize()
 
-    RED.init(server, settings);
+    RED.init(server,settings);
 
     expressApp.use(settings.httpAdminRoot, RED.httpAdmin);
     expressApp.use(settings.httpNodeRoot, RED.httpNode);
