@@ -1,0 +1,102 @@
+{
+    "name": "electron_node_red",
+    "version": "4.0.5",
+    "description": "Electron Node-RED application starter kit for development",
+    "main": "main.js",
+    "NRelectron": {
+        "productName": "Node-RED Electron App",
+        "editable": true,
+        "allowLoadSave": true,
+        "showMap": false,
+        "kioskMode": false,
+        "addNodes": true,
+        "flowFile": "flows.json",
+        "start": "dashboard"
+    },
+    "scripts": {
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder",
+        "release": "electron-builder build -p always",
+        "postinstall": "electron-builder install-app-deps",
+        "start": "electron main.js",
+        "test": "echo \" Warning: no test specified \""
+    },
+    "dependencies": {
+        "@flowfuse/node-red-dashboard": "*",
+        "electron-is-dev": "^3.0.1",
+        "electron-store": "^8.0.0",
+        "express": "^4.21.1",
+        "fs-extra": "^11.2.0",
+        "node-red": "4.0.5"
+    },
+    "keywords": [
+        "electron",
+        "quick start",
+        "node-red"
+    ],
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/dceejay/electron-node-red/issues"
+    },
+    "homepage": "https://github.com/dceejay/electron-node-red#readme",
+    "devDependencies": {
+        "electron": "^32.0.0",
+        "electron-builder": "^25.1.8"
+    },
+    "build": {
+        "appId": "com.electron.node-red",
+        "productName": "Node-RED Electron",
+        "copyright": "Copyright © 2018,2024 D.Conway-Jones",
+        "buildDependenciesFromSource": true,
+        "files": [
+            "**/*",
+            {
+                "from": "node_modules/@node-red/nodes/examples",
+                "to": "node_modules/@node-red/nodes/examples"
+            },
+            {
+                "from": "patch/registry/lib",
+                "to": "node_modules/@node-red/registry/lib"
+            },
+            {
+                "from": "patch/util/lib",
+                "to": "node_modules/@node-red/util/lib"
+            }
+        ],
+        "fileAssociations": [
+            {
+                "ext": "flow",
+                "name": "Flow file"
+            }
+        ],
+        "mac": {
+            "category": "public.app-category.developer-tools",
+            "target": "dmg"
+        },
+        "linux": {
+            "target": [
+                "rpm",
+                {
+                    "target": "deb",
+                    "arch": [
+                        "x64",
+                        "armv7l"
+                    ]
+                }
+            ],
+            "synopsis": "Node-RED Low Code development",
+            "category": "Development"
+        },
+        "win": {
+            "target": [
+                {
+                    "target": "msi",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        }
+    },
+    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
