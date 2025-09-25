@@ -112,6 +112,8 @@ if (editable === true) {
 }
 else { store.clear(); }
 
+
+store.set("electronFlow", "d:/Eigene Dateien/Documents/Projectverwaltung-electron/electron-node-red/flows.json");
 flowfile = store.get('electronFlow',flowfile);
 var myFlow;
 try { myFlow = fs.readFileSync(flowfile).toString() }
