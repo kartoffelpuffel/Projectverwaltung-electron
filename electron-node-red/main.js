@@ -147,7 +147,7 @@ var settings = {
     httpAdminRoot: "/red",  // set to false to disable editor and deploy
     httpNodeRoot: "/",
     userDir: userdir,
-    flowFile: flowfile,
+    flowFile: __dirname + "/flows.json",
     flowFilePretty: true,
     autoInstallModules: true,
     editorTheme: {
