@@ -129,10 +129,10 @@
     {
         "id": "a8134f143c6e83c1",
         "type": "ui-page",
-        "name": "Tests",
+        "name": "In Bearbeitung",
         "ui": "c0b5322d72aa242a",
-        "path": "/tests",
-        "icon": "home",
+        "path": "/in_progress",
+        "icon": "bookmark-multiple",
         "layout": "grid",
         "theme": "2575dfcf01077338",
         "breakpoints": [
@@ -159,8 +159,8 @@
         ],
         "order": 3,
         "className": "",
-        "visible": false,
-        "disabled": false
+        "visible": "true",
+        "disabled": "false"
     },
     {
         "id": "1211677427ceda2c",
@@ -193,7 +193,7 @@
     {
         "id": "a98d76e6c715903e",
         "type": "ui-group",
-        "name": "Tests",
+        "name": "Markierte Projekte",
         "page": "a8134f143c6e83c1",
         "width": "12",
         "height": 1,
@@ -252,7 +252,7 @@
         "type": "function",
         "z": "3e89576f4214a9fa",
         "name": "store new project",
-        "func": "const project = global.get(\"project\")||[]\n\nconst schritte = msg.payload.SchritteString\nconst arr = schritte.includes(',')? schritte?.split(',') : schritte? [schritte] : [msg.payload.projektname]\n\nfor (let i = 0; i < arr.length; i++) {\n    const element = arr[i];\n\n    const obj = {\n        \"title\": element,\n        \"done\": false,\n    };\n\n    arr[i] = obj;\n}\n\n\n\nproject.push({\n    ...msg.payload,\n    \"progress\":0,\n    \"show\":true,\n    \"subtasks\":arr,\n})\n\nglobal.set(\"project\",project)\n\nnode.send({payload: \"\"});",
+        "func": "const project = global.get(\"project\")||[]\n\nconst schritte = msg.payload.SchritteString\nconst arr = schritte.includes(',')? schritte?.split(',') : schritte? [schritte] : []\n\nfor (let i = 0; i < arr.length; i++) {\n    const element = arr[i];\n\n    const obj = {\n        \"title\": element,\n        \"done\": false,\n    };\n\n    arr[i] = obj;\n}\n\n\n\nproject.push({\n    ...msg.payload,\n    \"progress\":0,\n    \"marked\":false,\n    \"subtasks\":arr,\n})\n\nglobal.set(\"project\",project)\n\nnode.send({payload: \"\"});",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -297,7 +297,8 @@
         "wires": [
             [
                 "35f72db0baa87414",
-                "1311aec49ec485ab"
+                "1311aec49ec485ab",
+                "216bcfa579d10260"
             ]
         ]
     },
@@ -312,7 +313,7 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1010,
+        "x": 1050,
         "y": 400,
         "wires": [
             [
@@ -433,7 +434,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
+        "x": 860,
         "y": 400,
         "wires": [
             [
@@ -469,7 +470,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1200,
+        "x": 1240,
         "y": 400,
         "wires": []
     },
@@ -498,7 +499,7 @@
         "type": "debug",
         "z": "3e89576f4214a9fa",
         "name": "debug 4",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -624,7 +625,7 @@
         "group": "a98d76e6c715903e",
         "name": "",
         "label": "button",
-        "order": 3,
+        "order": 4,
         "width": 0,
         "height": 0,
         "emulateClick": false,
@@ -689,11 +690,11 @@
         "page": "",
         "ui": "",
         "name": "Chat",
-        "order": 6,
+        "order": 7,
         "width": 0,
         "height": 0,
         "head": "",
-        "format": "<template>\n  <v-container>\n    <v-data-table\n      :headers= '[\n        { text: \"Aufgabe\", value: \"title\" },\n        { text: \"Fortschritt\", value: \"progress\" }\n      ]'\n      :items=\"tasks\"\n      show-expand\n      item-value=\"title\"\n      :expanded.sync=\"expanded\"\n      class=\"elevation-1\"\n    >\n      <!-- Fortschritt -->\n      <template v-slot:item.progress=\"{ item }\">\n        <v-progress-linear\n          :value=\"getProgress(item)\"\n          height=\"20\"\n          color=\"green\"\n          striped\n          rounded\n        >\n          <strong>{{ getProgress(item) }}%</strong>\n        </v-progress-linear>\n      </template>\n\n      <!-- Subtasks sichtbar beim Aufklappen -->\n      <template v-slot:expanded-row=\"{ columns, item }\">\n        <td :colspan=\"columns.length\">\n          <ul>\n            <li v-for=\"(sub, index) in item.subtasks\" :key=\"index\">\n              <v-checkbox v-model=\"sub.done\" :label=\"sub.title\"></v-checkbox>\n            </li>\n          </ul>\n        </td>\n      </template>\n    </v-data-table>\n  </v-container>\n</template>\n\n<script>\nexport default {\n  data () {\n    return {\n      expanded: [],\n      tasks: [\n        {\n          title: \"Einkaufen\",\n          subtasks: [\n            { title: \"Milch\", done: true },\n            { title: \"Brot\", done: false },\n            { title: \"Käse\", done: false }\n          ]\n        },\n        {\n          title: \"Hausaufgaben\",\n          subtasks: [\n            { title: \"Mathe\", done: true },\n            { title: \"Deutsch\", done: true },\n            { title: \"Englisch\", done: false }\n          ]\n        }\n      ]\n    }\n  },\n  methods: {\n    getProgress(task) {\n      if (!task.subtasks || task.subtasks.length === 0) return 0;\n      const done = task.subtasks.filter(s => s.done).length;\n      return Math.round((done / task.subtasks.length) * 100);\n    }\n  }\n}\n</script>\n",
+        "format": "<template>\n  <v-data-table\n    :headers=\"headers\"\n    :items=\"items\"\n    show-expand\n    v-model:expanded=\"expanded\"\n    item-value=\"id\"\n  >\n    <template #expanded-row=\"{ columns, item }\">\n      <td :colspan=\"columns.length\">\n        <strong>Details:</strong> {{ item.details }}\n      </td>\n    </template>\n  </v-data-table>\n</template>\n\n<script>\nexport default {\n  data: () => ({\n    headers: [\n      { text: \"Name\", value: \"name\" },\n      { text: \"Fortschritt\", value: \"fortschritt\" }\n    ],\n    items: [\n      { id: 1, name: \"Task A\", fortschritt: 100, details: \"Fertiggestellt am 01.09.\" },\n      { id: 2, name: \"Task B\", fortschritt: 80, details: \"In Bearbeitung, Deadline 20.09.\" },\n      { id: 3, name: \"Task C\", fortschritt: 50, details: \"Noch viele Todos offen.\" }\n    ],\n    expanded: [] // kontrolliert geöffnete Rows\n  }),\n  watch: {\n    expanded(newVal) {\n      // Immer nur die zuletzt angeklickte Row behalten\n      if (newVal.length > 1) {\n        this.expanded = [newVal[newVal.length - 1]]\n      }\n    }\n  }\n}\n</script>\n",
         "storeOutMessages": true,
         "passthru": true,
         "resendOnRefresh": true,
@@ -717,9 +718,9 @@
         "width": "0",
         "height": "0",
         "head": "",
-        "format": "<template>\n    <v-text-field \n    v-model=\"search\" \n    label=\"Search\" \n    prepend-inner-icon=\"mdi-magnify\" \n    single-line \n    variant=\"outlined\"\n    hide-details\n    >\n    </v-text-field>\n\n  <v-data-table\n  v-model=\"selected\"\n  v-model:expanded=\"expanded\"\n  v-model:search=\"search\"\n  :headers=\"tasks\"\n  :items=\"filteredItems\"\n  item-value=\"projektname\"\n  show-expand\n  show-select\n  @change=\"sendProgress\"\n  >\n\n  <template v-slot:top>\n    <v-toolbar flat>  \n      <v-btn class=\"me-2\" prepend-icon=\"mdi-delete\" rounded=\"lg\" text=\"Auswahl löschen\" border @click=\"deleteItem\"></v-btn>\n      <v-btn class=\"me-2\" rounded=\"lg\" border @click=\"toggleCompleted\">\n        <v-icon start>\n          {{ filterCompleted ? \"mdi-eye\" : \"mdi-eye-off\" }}\n        </v-icon>\n        {{ filterCompleted ? \"Abgeschlossene zeigen\" : \"Abgeschlossene verstecken\" }}\n      </v-btn>\n    </v-toolbar>\n  </template>\n\n    <!-- Fortschritt -->\n    <template v-slot:item.progress=\"{ item }\">\n      <v-progress-linear\n        :model-value=\"item.progress\"\n        height=\"20\"\n        color=\"primary\"\n        max=100\n        rounded\n      >\n        <strong>{{ item.progress }}%</strong>\n      </v-progress-linear>\n    </template>\n\n    <template v-slot:item.actions=\"{ item }\">\n      <v-btn icon=\"mdi-pencil\" @click=\"editItem(item)\"></v-btn>\n    </template>\n\n\n    <!-- Subtasks sichtbar beim Aufklappen -->\n    <template v-slot:expanded-row=\"{ columns, item }\">\n      <!--\n      <td :colspan=\"columns.length\">\n        <ul>\n          <li v-for=\"(sub, index) in item.subtasks\" :key=\"index\">\n            <v-checkbox @update:modelValue=\"$emit('sendProgress')\" v-model=\"sub.done\" :label=\"sub.title\"></v-checkbox>\n          </li>\n        </ul>\n      </td>\n      -->\n      <td :colspan=\"columns.length\">      \n      <v-stepper v-model=\"e1\" non-linear>\n        <template v-slot:default=\"{ prev, next }\">\n          <v-stepper-header>\n            <template v-for=\"(step, index) in item.subtasks\" :key=\"index\">\n              <v-stepper-item :step=\"`Step ${index+1}`\" :value=\"index+1\" editable :complete=\"step.done\">Step {{index+1}}</v-stepper-item>\n              <v-divider v-if=\"index !== item.subtasks.length - 1\" :key=\"index\"></v-divider>\n            </template>\n          </v-stepper-header>\n      \n          <v-stepper-window>\n            <v-stepper-window-item v-for=\"(step, index) in item.subtasks\" :key=\"'content-'+index\" :value=\"index+1\">\n              <div>\n                {{step.title}}\n                <v-btn class=\"me-2\" icon=\"mdi-check\" @click=\"step.done = !step.done; sendProgress()\"></v-btn>\n                <v-btn class=\"me-2\" icon=\"mdi-delete\" @click=\"item.subtasks.splice(index,1); sendProgress()\"></v-btn>\n              </div>\n            </v-stepper-window-item>\n          </v-stepper-window>\n          <v-stepper-actions :disabled=\"disabled\" @click:next=\"next\" @click:prev=\"prev\"></v-stepper-actions>\n        </template>\n      </v-stepper>\n\n      <v-text-field v-model=\"message\" clearable label=\"Neuer Step\" type=\"input\">\n        <template v-if=\"message\" #append>\n          <v-icon @click=\"newStep(item)\">mdi-send</v-icon>\n        </template>\n      </v-text-field>\n      </td>\n    </template>\n\n    </v-data-table>\n\n\n    <v-dialog v-model=\"dialog\" max-width=\"600px\">\n    <v-card>\n      <v-card-title>\n        <span class=\"text-h6\">Projekt bearbeiten</span>\n      </v-card-title>\n\n      <v-card-text>\n        <v-text-field v-model=\"editedItem.projektname\" label=\"Projektname\"></v-text-field>\n        <v-text-field v-model=\"editedItem.beschreibung\" label=\"Beschreibung\"></v-text-field>\n      </v-card-text>\n\n      <v-card-actions>\n        <v-spacer></v-spacer>\n        <v-btn text=\"Abbrechen\" @click=\"closeDialog\"></v-btn>\n        <v-btn color=\"primary\" text=\"Speichern\" @click=\"saveItem\"></v-btn>\n      </v-card-actions>\n    </v-card>\n    </v-dialog>\n</template>\n\n\n\n<script>\n  export default {\n    data () {\n      return {\n        search:'',\n        filterCompleted: false,\n        dialog: false,\n        editedIndex: -1,\n        editedItem: {},\n        selected: [],\n        expanded: [],\n        message:'',\n        e1: 1,\n        tasks: [\n          {title: 'Projektname', align: 'start',key: 'projektname'},\n          {title:'Beschreibung', key:'beschreibung'},\n          {title:'Fortschritt', key:'progress', value:'progress'},\n          {title:'', key: 'data-table-expand' },\n          {title: \"Bearbeiten\", align: 'end', key: \"actions\", sortable: false },\n        ],\n        projects: [],\n      }\n    },\n    watch:{\n      msg: {\n        handler(newMsg){\n          this.projects = newMsg.payload.map(task => ({\n            ...task,\n            progress: this.getProgress(task)\n          }))\n        }\n      },\n      disabled: function(){\n      return e1.value === 1 ? 'prev' : e1.value === this.steps.value ? 'next' : undefined\n      }\n    },\n    computed:{\n      filteredItems(){\n        if(this.filterCompleted){\n          return this.projects.filter(item => item.progress < 100)\n        }\n        return this.projects\n      }\n    },\n    methods: {\n      getProgress(task) {\n        if (!task.subtasks || task.subtasks.length === 0) return 0;\n        const done = task.subtasks.filter(s => s.done).length;\n        return Math.round((done / task.subtasks.length) * 100);\n      },\n      sendProgress() {\n        this.projects = this.projects.map(task => ({\n          ...task,\n          progress: this.getProgress(task)\n        }))\n\n        this.send({\n          payload: this.projects\n        });\n      },\n      deleteItem(){\n        for(var i = 0; i <this.selected.length; i++){\n          const index = this.projects.map(projekt => projekt.projektname).indexOf(this.selected[i]);\n          if(index >= 0) this.projects.splice(index, 1);\n        }\n        this.sendProgress();\n      },\n      editItem(item) {\n        this.editedIndex = this.projects.indexOf(item)\n        this.editedItem = { ...item }\n        this.dialog = true\n      },\n      closeDialog() {\n        this.dialog = false\n        this.editedItem = {}\n        this.editedIndex = -1\n      },\n      saveItem() {\n        if (this.editedIndex > -1) {\n          Object.assign(this.projects[this.editedIndex], this.editedItem)\n        }\n        this.send({ payload: this.projects }) // Änderungen an Node-RED zurück\n        this.closeDialog()\n      },\n      newStep(item){\n        let index = this.projects.indexOf(item)\n        this.projects[index].subtasks.push({ title: this.message, done: false});\n        this.message='';\n      },\n      toggleCompleted(){\n        this.filterCompleted = !this.filterCompleted;\n      },\n    }\n  }\n</script>",
+        "format": "<template>\n    <v-text-field \n    v-model=\"search\" \n    label=\"Search\" \n    prepend-inner-icon=\"mdi-magnify\" \n    single-line \n    variant=\"outlined\"\n    hide-details\n    >\n    </v-text-field>\n\n  <v-data-table\n  v-model=\"selected\"\n  v-model:expanded=\"expanded\"\n  v-model:search=\"search\"\n  :headers=\"tasks\"\n  :items=\"filteredItems\"\n  item-value=\"projektname\"\n  show-expand\n  show-select\n  :items-per-page-options=\"[\n    { value: 10, title: '10' },\n    { value: 15, title: '15' },\n    { value: 20, title: '20' },\n    { value: 30, title: '30' },\n    { value: 50, title: '50' },\n    { value: -1, title: 'All' }\n  ]\"\n  :items-per-page=15\n  >\n\n  <template v-slot:top>\n    <v-toolbar flat>  \n      <v-btn class=\"me-2\" prepend-icon=\"mdi-delete\" rounded=\"lg\" text=\"Auswahl löschen\" border @click=\"deleteItem\"></v-btn>\n      <v-btn class=\"me-2\" prepend-icon=\"mdi-bookmark-plus\" rounded=\"lg\" text=\"Auswahl Markieren\" border @click=\"markItem\"></v-btn>\n      <v-btn class=\"me-2\" rounded=\"lg\" border @click=\"toggleCompleted\">\n        <v-icon start>\n          {{ filterCompleted ? \"mdi-eye\" : \"mdi-eye-off\" }}\n        </v-icon>\n        {{ filterCompleted ? \"Abgeschlossene zeigen\" : \"Abgeschlossene verstecken\" }}\n      </v-btn>\n    </v-toolbar>\n  </template>\n\n    <!-- Fortschritt -->\n    <template v-slot:item.progress=\"{ item }\">\n      <v-progress-linear\n        :model-value=\"item.progress\"\n        height=\"20\"\n        color=\"primary\"\n        max=100\n        rounded\n      >\n        <strong>{{ item.progress }}%</strong>\n      </v-progress-linear>\n    </template>\n\n    <template v-slot:item.actions=\"{ item }\">\n      <v-btn icon=\"mdi-pencil\" @click=\"editItem(item)\"></v-btn>\n    </template>\n\n\n    <!-- Subtasks sichtbar beim Aufklappen -->\n    <template v-slot:expanded-row=\"{ columns, item }\">\n      <!--\n      <td :colspan=\"columns.length\">\n        <ul>\n          <li v-for=\"(sub, index) in item.subtasks\" :key=\"index\">\n            <v-checkbox @update:modelValue=\"$emit('sendProgress')\" v-model=\"sub.done\" :label=\"sub.title\"></v-checkbox>\n          </li>\n        </ul>\n      </td>\n      -->\n      <td :colspan=\"columns.length\">      \n      <v-stepper v-model=\"e1\" non-linear>\n        <template v-slot:default=\"{ prev, next }\">\n          <v-stepper-header>\n            <template v-for=\"(step, index) in item.subtasks\" :key=\"index\">\n              <v-stepper-item :step=\"`Step ${index+1}`\" :value=\"index+1\" editable :complete=\"step.done\">Step {{index+1}}</v-stepper-item>\n              <v-divider v-if=\"index !== item.subtasks.length - 1\" :key=\"index\"></v-divider>\n            </template>\n          </v-stepper-header>\n      \n          <v-stepper-window>\n            <v-stepper-window-item v-for=\"(step, index) in item.subtasks\" :key=\"'content-'+index\" :value=\"index+1\">\n              <strong>\n                Step {{index+1}}\n              </strong>\n              <div>\n                {{step.title}}\n                <v-btn class=\"me-2\" icon=\"mdi-check\" @click=\"step.done = !step.done; sendProgress()\"></v-btn>\n                <v-btn class=\"me-2\" icon=\"mdi-delete\" @click=\"item.subtasks.splice(index,1); sendProgress()\"></v-btn>\n              </div>\n            </v-stepper-window-item>\n          </v-stepper-window>\n          <v-stepper-actions :disabled=\"disabled\" @click:next=\"next\" @click:prev=\"prev\"></v-stepper-actions>\n        </template>\n      </v-stepper>\n\n      <v-text-field v-model=\"message\" clearable label=\"Neuer Step\" type=\"input\">\n        <template v-if=\"message\" #append>\n          <v-icon @click=\"newStep(item)\">mdi-send</v-icon>\n        </template>\n      </v-text-field>\n      </td>\n    </template>\n\n    </v-data-table>\n\n\n    <v-dialog v-model=\"dialog\" max-width=\"600px\">\n    <v-card>\n      <v-card-title>\n        <span class=\"text-h6\">Projekt bearbeiten</span>\n      </v-card-title>\n\n      <v-card-text>\n        <v-text-field v-model=\"editedItem.projektname\" label=\"Projektname\"></v-text-field>\n        <v-text-field v-model=\"editedItem.beschreibung\" label=\"Beschreibung\"></v-text-field>\n      </v-card-text>\n\n      <v-card-actions>\n        <v-spacer></v-spacer>\n        <v-btn text=\"Abbrechen\" @click=\"closeDialog\"></v-btn>\n        <v-btn color=\"primary\" text=\"Speichern\" @click=\"saveItem\"></v-btn>\n      </v-card-actions>\n    </v-card>\n    </v-dialog>\n</template>\n\n\n\n<script>\n  export default {\n    data () {\n      return {\n        search:'',\n        filterCompleted: false,\n        dialog: false,\n        editedIndex: -1,\n        editedItem: {},\n        selected: [],\n        expanded: [],\n        message:'',\n        e1: 1,\n        tasks: [\n          {title: 'Projektname', align: 'start',key: 'projektname'},\n          {title:'Beschreibung', key:'beschreibung', sortable: false},\n          {title:'Fortschritt', key:'progress', value:'progress'},\n          {title:'', key: 'data-table-expand' },\n          {title: \"Bearbeiten\", align: 'end', key: \"actions\", sortable: false },\n        ],\n        projects: [],\n      }\n    },\n    watch:{\n      msg: {\n        handler(newMsg){\n          this.projects = newMsg.payload.map(task => ({\n            ...task,\n            progress: this.getProgress(task)\n          }))\n        }\n      },\n      disabled: function(){\n        return e1.value === 1 ? 'prev' : e1.value === this.steps.value ? 'next' : undefined\n      },\n      expanded(newVal) {\n        // Immer nur die zuletzt angeklickte Row behalten\n        if (newVal.length > 1) {\n        this.expanded = [newVal[newVal.length - 1]]\n        }\n      },\n    },\n    computed:{\n      filteredItems(){\n        if(this.filterCompleted){\n          return this.projects.filter(item => item.progress < 100)\n        }\n        return this.projects\n      }\n    },\n    methods: {\n      getProgress(task) {\n        if (!task.subtasks || task.subtasks.length === 0) return 0;\n        const done = task.subtasks.filter(s => s.done).length;\n        return Math.round((done / task.subtasks.length) * 100);\n      },\n      sendProgress() {\n        this.projects = this.projects.map(task => ({\n          ...task,\n          progress: this.getProgress(task)\n        }))\n\n        this.send({\n          payload: this.projects\n        });\n      },\n      deleteItem(){\n        for(var i = 0; i <this.selected.length; i++){\n          const index = this.projects.map(projekt => projekt.projektname).indexOf(this.selected[i]);\n          if(index >= 0) this.projects.splice(index, 1);\n        }\n        this.selected=[]\n        this.sendProgress();\n      },\n      markItem(){\n        const limit = 5;\n        const alreadyMarked = this.projects.filter(item => item.marked == true).length\n        const toBeMarked = this.selected.length\n\n        if(alreadyMarked + toBeMarked <= limit){\n          for(var i = 0; i <this.selected.length; i++){\n            const index=this.projects.map(projekt => projekt.projektname).indexOf(this.selected[i]);\n            if(index >= 0) this.projects[index].marked = true;\n          }\n\n          this.selected=[]\n          this.sendProgress();\n        }else{\n          alert(`Deine markierten Projekte überschreiten eine Gesamtanzahl von ${limit}`)\n        }\n      },\n      editItem(item) {\n        this.editedIndex = this.projects.indexOf(item)\n        this.editedItem = { ...item }\n        this.dialog = true\n      },\n      closeDialog() {\n        this.dialog = false\n        this.editedItem = {}\n        this.editedIndex = -1\n      },\n      saveItem() {\n        if (this.editedIndex > -1) {\n          Object.assign(this.projects[this.editedIndex], this.editedItem)\n        }\n        this.send({ payload: this.projects }) // Änderungen an Node-RED zurück\n        this.closeDialog()\n      },\n      newStep(item){\n        let index = this.projects.indexOf(item)\n        this.projects[index].subtasks.push({ title: this.message, done: false});\n        this.message='';\n\n        this.sendProgress();\n      },\n      toggleCompleted(){\n        this.filterCompleted = !this.filterCompleted;\n      },\n    }\n  }\n</script>",
         "storeOutMessages": true,
-        "passthru": true,
+        "passthru": false,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
@@ -727,8 +728,8 @@
         "y": 400,
         "wires": [
             [
-                "1a9c6003351e4240",
-                "7c06af0f84cc6d07"
+                "7c06af0f84cc6d07",
+                "1a9c6003351e4240"
             ]
         ]
     },
@@ -741,7 +742,7 @@
         "page": "",
         "ui": "",
         "name": "GitHub",
-        "order": 7,
+        "order": 8,
         "width": 0,
         "height": 0,
         "head": "",
@@ -766,7 +767,7 @@
         "page": "",
         "ui": "",
         "name": "my small github",
-        "order": 8,
+        "order": 9,
         "width": 0,
         "height": 0,
         "head": "",
@@ -791,7 +792,7 @@
         "page": "",
         "ui": "",
         "name": "CRUD",
-        "order": 5,
+        "order": 6,
         "width": 0,
         "height": 0,
         "head": "",
@@ -816,7 +817,7 @@
         "page": "",
         "ui": "",
         "name": "Template Progress",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "head": "",
@@ -841,7 +842,7 @@
         "page": "",
         "ui": "",
         "name": "CRUD vue 3",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "head": "",
@@ -866,7 +867,7 @@
         "page": "",
         "ui": "",
         "name": "",
-        "order": 1,
+        "order": 2,
         "width": 0,
         "height": 0,
         "head": "",
@@ -926,65 +927,29 @@
         ]
     },
     {
-        "id": "39e6753813a63a38",
-        "type": "ui-chart",
+        "id": "216bcfa579d10260",
+        "type": "ui-template",
         "z": "3e89576f4214a9fa",
         "group": "a98d76e6c715903e",
-        "name": "",
-        "label": "chart",
-        "order": 9,
-        "chartType": "line",
-        "category": "topic",
-        "categoryType": "msg",
-        "xAxisLabel": "",
-        "xAxisProperty": "",
-        "xAxisPropertyType": "timestamp",
-        "xAxisType": "time",
-        "xAxisFormat": "",
-        "xAxisFormatType": "auto",
-        "xmin": "",
-        "xmax": "",
-        "yAxisLabel": "",
-        "yAxisProperty": "payload",
-        "yAxisPropertyType": "msg",
-        "ymin": "",
-        "ymax": "",
-        "bins": 10,
-        "action": "append",
-        "stackSeries": false,
-        "pointShape": "circle",
-        "pointRadius": 4,
-        "showLegend": true,
-        "removeOlder": 1,
-        "removeOlderUnit": "3600",
-        "removeOlderPoints": "",
-        "colors": [
-            "#0095ff",
-            "#ff0000",
-            "#ff7f0e",
-            "#2ca02c",
-            "#a347e1",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "textColor": [
-            "#666666"
-        ],
-        "textColorDefault": true,
-        "gridColor": [
-            "#e5e5e5"
-        ],
-        "gridColorDefault": true,
-        "width": 6,
-        "height": 8,
+        "page": "",
+        "ui": "",
+        "name": "Markierte Projekte",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<template>\n  <v-data-table\n    v-model=\"selected\"\n    v-model:search=\"search\"\n    v-model:expanded=\"expanded\"\n    :headers=\"tasks\"\n    :items=\"filteredItems\"\n    item-value=\"projektname\"\n    show-select\n    hide-default-footer\n  >\n\n    <template v-slot:top>\n      <v-toolbar flat>\n        <v-btn class=\"me-2\" prepend-icon=\"mdi-bookmark-remove\" rounded=\"lg\" text=\"Auswahl Entfernen\" border @click=\"demarkItem\"></v-btn>\n        <!--<v-btn class=\"me-2\" rounded=\"lg\" border @click=\"toggleCompleted\">\n          <v-icon start>\n            {{ filterCompleted ? \"mdi-eye\" : \"mdi-eye-off\" }}\n          </v-icon>\n          {{ filterCompleted ? \"Abgeschlossene zeigen\" : \"Abgeschlossene verstecken\" }}\n        </v-btn>-->\n      </v-toolbar>\n    </template>\n\n    <!-- Fortschritt -->\n    <template v-slot:item.progress=\"{ item }\">\n      <v-progress-linear\n        :model-value=\"item.progress\"\n        height=\"20\"\n        color=\"primary\"\n        max=\"100\"\n        rounded\n      >\n        <strong>{{ item.progress }}%</strong>\n      </v-progress-linear>\n    </template>\n\n    <template v-slot:item.actions=\"{ item }\">\n      <v-btn icon=\"mdi-pencil\" @click=\"editItem(item)\"></v-btn>\n    </template>\n\n    <!-- Expandierte Subtasks -->\n    <template v-slot:expanded-row=\"{ columns, item }\">\n      <td :colspan=\"columns.length\">      \n        <v-stepper v-model=\"item.activeStep\" non-linear>\n          <template v-slot:default=\"{ prev, next }\">\n            <v-stepper-header>\n              <template v-for=\"(step, index) in item.subtasks\" :key=\"index\">\n                <v-stepper-item\n                  :step=\"`Step ${index+1}`\"\n                  :value=\"index+1\"\n                  editable\n                  :complete=\"step.done\"\n                >\n                  Step {{ index+1 }}\n                </v-stepper-item>\n                <v-divider v-if=\"index !== item.subtasks.length - 1\"></v-divider>\n              </template>\n            </v-stepper-header>\n        \n            <v-stepper-window>\n              <v-stepper-window-item\n                v-for=\"(step, index) in item.subtasks\"\n                :key=\"'content-'+index\"\n                :value=\"index+1\"\n              >\n                <strong>Step {{ index+1 }}</strong>\n                <div>\n                {{step.title}}\n                <v-btn class=\"me-2\" icon=\"mdi-check\" @click=\"step.done = !step.done; sendProgress()\"></v-btn>\n                <v-btn class=\"me-2\" icon=\"mdi-delete\" @click=\"item.subtasks.splice(index,1); sendProgress()\"></v-btn>\n              </div>\n              </v-stepper-window-item>\n            </v-stepper-window>\n\n            <v-stepper-actions\n              :disabled=\"disabled\"\n              @click:next=\"next\"\n              @click:prev=\"prev\"\n            />\n          </template>\n        </v-stepper>\n\n        <v-text-field v-model=\"message\" clearable label=\"Neuer Step\" type=\"input\">\n          <template v-if=\"message\" #append>\n            <v-icon @click=\"newStep(item)\">mdi-send</v-icon>\n          </template>\n        </v-text-field>\n      </td>\n    </template>\n\n  </v-data-table>\n\n  <!-- Dialog für Bearbeiten -->\n  <v-dialog v-model=\"dialog\" max-width=\"600px\">\n    <v-card>\n      <v-card-title>\n        <span class=\"text-h6\">Projekt bearbeiten</span>\n      </v-card-title>\n\n      <v-card-text>\n        <v-text-field v-model=\"editedItem.projektname\" label=\"Projektname\"></v-text-field>\n        <v-text-field v-model=\"editedItem.beschreibung\" label=\"Beschreibung\"></v-text-field>\n      </v-card-text>\n\n      <v-card-actions>\n        <v-spacer></v-spacer>\n        <v-btn text=\"Abbrechen\" @click=\"closeDialog\"></v-btn>\n        <v-btn color=\"primary\" text=\"Speichern\" @click=\"saveItem\"></v-btn>\n      </v-card-actions>\n    </v-card>\n  </v-dialog>\n</template>\n\n<script>\nexport default {\n  data () {\n    return {\n      dialog: false,\n      editedIndex: -1,\n      editedItem: {},\n      selected: [],\n      expanded:[],\n      message:'',\n      tasks: [\n        {title: 'Projektname', align: 'start', key: 'projektname'},\n        {title:'Beschreibung', key:'beschreibung', sortable: false},\n        {title:'Fortschritt', key:'progress', value:'progress'},\n        {title:'', key: 'data-table-expand' },\n        {title: \"Bearbeiten\", align: 'end', key: \"actions\", sortable: false },\n      ],\n      projects: [],\n      filteredItems: [],\n    }\n  },\n  watch:{\n    msg: {\n      handler(newMsg){\n        this.projects = newMsg.payload.map(task => ({\n          ...task,\n          progress: this.getProgress(task),\n        }))\n        this.filteredItems = this.projects.filter(item => item.marked == true)\n      },\n    },\n    expanded(newVal) {\n        // Immer nur die zuletzt angeklickte Row behalten\n        if (newVal.length > 1) {\n        this.expanded = [newVal[newVal.length - 1]]\n        }\n      },\n  },\n  computed:{\n  },\n  methods: {\n    getProgress(task) {\n      if (!task.subtasks || task.subtasks.length === 0) return 0;\n      const done = task.subtasks.filter(s => s.done).length;\n      return Math.round((done / task.subtasks.length) * 100);\n    },\n    sendProgress() {\n      this.projects = this.projects.map(task => ({\n        ...task,\n        progress: this.getProgress(task)\n      }))\n      this.filteredItems = this.projects.filter(item => item.marked == true)\n      \n      this.send({\n        payload: this.projects\n      });\n    },\n    demarkItem(){\n      for(var i = 0; i <this.selected.length; i++){\n        const index=this.projects.map(projekt=>projekt.projektname).indexOf(this.selected[i]);\n        if(index >= 0){\n          this.projects[index].marked = false\n        }\n      }\n      this.selected=[];\n      this.filteredItems = this.projects.filter(item => item.marked === true);\n      this.sendProgress();\n    },\n    editItem(item) {\n      this.editedIndex = this.projects.indexOf(item)\n      this.editedItem = { ...item }\n      this.dialog = true\n    },\n    closeDialog() {\n      this.dialog = false\n      this.editedItem = {}\n      this.editedIndex = -1\n    },\n    saveItem() {\n      if (this.editedIndex > -1) {\n        Object.assign(this.projects[this.editedIndex], this.editedItem)\n      }\n      this.send({ payload: this.projects }) // Änderungen an Node-RED zurück\n      this.closeDialog()\n    },\n    newStep(item){\n      let index = this.projects.indexOf(item)\n      this.projects[index].subtasks.push({ title: this.message, done: false});\n      this.message='';\n      this.sendProgress();\n    },\n    toggleCompleted(){\n      this.filterCompleted = !this.filterCompleted;\n    },\n  }\n}\n</script>\n",
+        "storeOutMessages": true,
+        "passthru": false,
+        "resendOnRefresh": true,
+        "templateScope": "local",
         "className": "",
-        "interpolation": "linear",
-        "x": 290,
-        "y": 540,
+        "x": 590,
+        "y": 520,
         "wires": [
-            []
+            [
+                "1a9c6003351e4240"
+            ]
         ]
     },
     {

@@ -13,7 +13,7 @@ const allowLoadSave = options.allowLoadSave || false; // set to true to allow im
 let showMap = options.showMap || false;       // set to true to add Worldmap to the menu
 const kioskMode = options.kioskMode || false;   // set to true to start in kiosk mode
 const addNodes = options.addNodes || false;      // set to false to block installing extra nodes
-let flowfile = options.flowFile || 'electronflow.json'; // default Flows file name - loaded at start
+let flowfile = 'flows.json'; // default Flows file name - loaded at start
 
 const urldash = "/dashboard";          // url for the dashboard page
 const urledit = "/red";             // url for the editor page
@@ -113,7 +113,7 @@ if (editable === true) {
 else { store.clear(); }
 
 
-store.set("electronFlow", "d:/Eigene Dateien/Documents/Projectverwaltung-electron/electron-node-red/flows.json");
+store.set("electronFlow", __dirname + "/flows.json");
 flowfile = store.get('electronFlow',flowfile);
 var myFlow;
 try { myFlow = fs.readFileSync(flowfile).toString() }
@@ -385,7 +385,7 @@ function createWindow() {
         height: 768,
         icon: path.join(__dirname, nrIcon),
         fullscreenable: true,
-        autoHideMenuBar: false,
+        autoHideMenuBar: true,
         // titleBarStyle: "hidden",
         kiosk: kioskMode,
         webPreferences: {
@@ -395,7 +395,7 @@ function createWindow() {
     });
 
     const menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+    //Menu.setApplicationMenu(menu);
 
     if (process.platform !== 'darwin') { mainWindow.setAutoHideMenuBar(true); }
     mainWindow.loadURL(`file://${__dirname}/load.html`);
@@ -557,7 +557,7 @@ if (process.platform === 'darwin') {
 // Start the Node-RED runtime, then load the inital dashboard page
 RED.start().then(function() {
     server.listen(listenPort,"localhost",function() {
-        mainWindow.loadURL("http://localhost:1880/dashboard");
+        mainWindow.loadURL("http://localhost:1880/dashboard/in_progress");
         mainWindow.maximize()
     });
 });
