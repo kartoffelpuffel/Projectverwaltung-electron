@@ -1,1 +1,521 @@
-[{"projektname":"Homelab bauen","beschreibung":"mit RPi oder so ein kleines Homelab machen","SchritteString":"RPi4 kaufen,OS installieren,Docker installieren,MQTT Broker aufsetzen,node-red aufsetzen","progress":14,"marked":true,"subtasks":[{"title":"RPi4 kaufen","done":true},{"title":"OS installieren","done":false},{"title":"Docker installieren","done":false},{"title":"MQTT Broker aufsetzen","done":false},{"title":"node-red aufsetzen","done":false},{"title":"65% Tastatur kaufen","done":false},{"title":"Mini HDMI Kabel","done":false}]},{"projektname":"Ventilator bauen","beschreibung":"ein kleiner Ventilator von ca. 180x180x80mm³","SchritteString":"grobe Konstruktion,Model überarbeiten,Motor bestellen,BLDC Motortreiber bestellen,Arduino programmieren,zusammenbauen","progress":33,"marked":false,"subtasks":[{"title":"grobe Konstruktion","done":true},{"title":"Model überarbeiten","done":false},{"title":"Motor bestellen","done":true},{"title":"BLDC Motortreiber bestellen","done":false},{"title":"Arduino programmieren","done":false},{"title":"zusammenbauen","done":false}]},{"projektname":"Selbstbewässerungsanlage","beschreibung":"Ein automatisiertes System um Hauspflanzen zu bewässern","SchritteString":"programm schreiben,programm überarbeiten,teile bestellen,zusammenbauen,Gehäuse konstruieren,drucken,Cover für Sensor machen,testen","progress":38,"marked":true,"subtasks":[{"title":"programm schreiben","done":true},{"title":"programm überarbeiten","done":false},{"title":"teile bestellen","done":true},{"title":"zusammenbauen","done":true},{"title":"Gehäuse konstruieren","done":false},{"title":"drucken","done":false},{"title":"Cover für Sensor machen","done":false},{"title":"testen","done":false}]},{"projektname":"Jalousie Projekt","beschreibung":"ein kleines Projekt, welches mich befähigt eine Jalousie remote ein und aus zu fahren","SchritteString":"Teile bestellen,konstruieren,ESP32/RPi programmieren,MQTT aufsetzen,node-red dashboard/gui erstellen","progress":0,"marked":false,"subtasks":[{"title":"Teile bestellen","done":false},{"title":"konstruieren","done":false},{"title":"ESP32/RPi programmieren","done":false},{"title":"MQTT aufsetzen","done":false},{"title":"node-red dashboard/gui erstellen","done":false}]},{"projektname":"3D-Drucker reparieren","beschreibung":"Luftzufürung fällt die ganze Zeit ab","SchritteString":"Slicer Einstellungen,Luftzuführung ankleben","progress":100,"marked":false,"subtasks":[{"title":"Slicer Einstellungen","done":true},{"title":"Luftzuführung ankleben","done":true}]},{"projektname":"Projektverwaltung","beschreibung":"verschiedene Projektverwaltungen","SchritteString":"normal,npm pkg als exe,npm electron-node-red als exe","progress":100,"marked":false,"subtasks":[{"title":"normal","done":true},{"title":"npm pkg als exe","done":true},{"title":"npm electron-node-red als exe","done":true},{"title":"Als .bat","done":true},{"title":"mit puppeteer Library","done":true},{"title":"mit electron","done":true}],"activeStep":2},{"projektname":"Wdhl Studium","beschreibung":"alles jeden Tag 30min wdhl","SchritteString":"ET,IP,IMA,AMA","progress":0,"marked":false,"subtasks":[{"title":"ET","done":false},{"title":"IP","done":false},{"title":"IMA","done":false},{"title":"AMA","done":false}]},{"projektname":"Luftqualitätschecker","beschreibung":"Ein ESP32 der mit Hilfe eines CO2 Sensors die Luftqualität misst und Maßnahmen empfiehlt","SchritteString":"ESP32 kaufen,CO2 Sensor kaufen (ENS 160),LCD Bildschirm?,Gehäuse konstruieren,drucken,https://fmh-studios.de/esp32/co2-sensor-ens160-esp32-tutorial/,Code schreiben,MQTT Client auf ESP,Broker auf RPi4B,node-red flow für MQTT,Handy MQTT Client","progress":0,"marked":false,"subtasks":[{"title":"ESP32 kaufen","done":false},{"title":"CO2 Sensor kaufen (ENS 160)","done":false},{"title":"LCD Bildschirm?","done":false},{"title":"Gehäuse konstruieren","done":false},{"title":"drucken","done":false},{"title":"https://fmh-studios.de/esp32/co2-sensor-ens160-esp32-tutorial/","done":false},{"title":"Code schreiben","done":false},{"title":"MQTT Client auf ESP","done":false},{"title":"Broker auf RPi4B","done":false},{"title":"node-red flow für MQTT","done":false},{"title":"Handy MQTT Client","done":false}]},{"projektname":"USB Hub","beschreibung":"Einen USB Hub kaufen, damit du deine ganzen Projekte irgendwo anschließen kannst","SchritteString":"","progress":100,"marked":false,"subtasks":[{"title":"USB Hub kaufen","done":true}]},{"projektname":"Octoprint","beschreibung":"zum Überwachen und scheiße vom 3D Drucker","SchritteString":"RPi3B+ kaufen,SD-Karte kaufen,Octoprint installieren,???","progress":63,"marked":true,"subtasks":[{"title":"RPi3B+ kaufen","done":true},{"title":"SD-Karte kaufen","done":true},{"title":"Octoprint installieren","done":true},{"title":"RPi Gehäuse konstruieren","done":true},{"title":"Gehäuse drucken","done":false},{"title":"Extensions installieren und ausprobieren","done":false},{"title":"Druckbettgröße korrigieren","done":true},{"title":"Webcam integrieren","done":false}],"activeStep":8},{"projektname":"handwriting synthesis","beschreibung":"Ein GitHub Projekt was ein Neuronales Netzwerk auf meine Handschrift trainieren soll","SchritteString":"","progress":0,"marked":false,"subtasks":[{"title":"Doku durchlesen","done":false},{"title":"eigenes Set an Handschrift einfügen","done":false},{"title":"nachschauen wie das funktioniert","done":false}]},{"projektname":"Llama","beschreibung":"Ein eigenes Llama 3 Modell lokal auf meine Handschrift trainieren","SchritteString":"Llama ziehen,auf Handschrift trainieren,einfach so allgemein machen","progress":0,"marked":false,"subtasks":[{"title":"Llama ziehen","done":false},{"title":"auf Handschrift trainieren","done":false},{"title":"einfach so allgemein machen","done":false}],"activeStep":1},{"projektname":"Bitaufnahme Smalcalda","beschreibung":"Schraubendreher Smalcalda verwendbar machen","SchritteString":"Bitaufnahme konstruieren,Modell überarbeiten,verschiedene Varianten drucken,auf Torsion testen,Smalcalda reparieren :(","progress":80,"marked":true,"subtasks":[{"title":"Bitaufnahme konstruieren","done":true},{"title":"Modell überarbeiten","done":true},{"title":"verschiedene Varianten drucken","done":true},{"title":"auf Torsion testen","done":false},{"title":"Smalcalda reparieren :(","done":true}],"activeStep":5},{"projektname":"Torsionsprüfstand","beschreibung":"Eine kleine Vorrichtung, welche mit einem Motor Torsionskräfte auf Testkörker auswirkt und die Kraft plottet (siehe Zugversuch)","SchritteString":"ESP kaufen, Motor aussuchen und bestellen (Stepper?),Vorrichtung konstruieren,bauen,Gehäuse drucken,Dashboard erstellen (Chart für Versuche, Historie, etc.)","progress":0,"marked":false,"subtasks":[{"title":"ESP kaufen","done":false},{"title":" Motor aussuchen und bestellen (Stepper?)","done":false},{"title":"Vorrichtung konstruieren","done":false},{"title":"bauen","done":false},{"title":"Gehäuse drucken","done":false},{"title":"Dashboard erstellen (Chart für Versuche","done":false},{"title":"Drehmoment messen mit Dehnmessstreifen","done":false}]},{"projektname":"Kleiner Node-RED Server","beschreibung":"Ein Raspberry Pi Zero der die Node RED Projektverwaltung hostet und die ganze Zeit am Netz hängt (Server halt)","SchritteString":"RPi 0,SD-Karte,OS installieren,Node-Red installieren,Gehäuse drucken","progress":40,"marked":false,"subtasks":[{"title":"RPi 0","done":true},{"title":"SD-Karte","done":true},{"title":"OS installieren","done":false},{"title":"Gehäuse drucken","done":false},{"title":"Node RED installieren https://nodered.org/docs/getting-started/raspberrypi","done":false}]},{"projektname":"Docker Desktop","beschreibung":"","SchritteString":"Install,Install WSL https://learn.microsoft.com/en-us/windows/wsl/install,Maybe enable Virtualization in BIOS https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/topics/#docker-desktop-fails-due-to-virtualization-not-working,get some images","progress":20,"marked":true,"subtasks":[{"title":"Install","done":true},{"title":"Install WSL https://learn.microsoft.com/en-us/windows/wsl/install","done":false},{"title":"Maybe enable Virtualization in BIOS https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/topics/#docker-desktop-fails-due-to-virtualization-not-working","done":false},{"title":"get some images","done":false},{"title":"Just make sure you have everything https://docs.docker.com/desktop/setup/install/windows-install/","done":false}],"activeStep":1}]
+[
+    {
+        "projektname": "Homelab bauen",
+        "beschreibung": "mit RPi oder so ein kleines Homelab machen",
+        "SchritteString": "RPi4 kaufen,OS installieren,Docker installieren,MQTT Broker aufsetzen,node-red aufsetzen",
+        "progress": 25,
+        "marked": true,
+        "subtasks": [
+            {
+                "title": "RPi4 kaufen",
+                "done": true
+            },
+            {
+                "title": "OS installieren",
+                "done": true
+            },
+            {
+                "title": "Docker installieren",
+                "done": false
+            },
+            {
+                "title": "MQTT Broker aufsetzen",
+                "done": false
+            },
+            {
+                "title": "node-red aufsetzen",
+                "done": false
+            },
+            {
+                "title": "65% Tastatur kaufen",
+                "done": false
+            },
+            {
+                "title": "Mini HDMI Kabel",
+                "done": false
+            },
+            {
+                "title": "3,5'' Bildschirm",
+                "done": false
+            }
+        ],
+        "activeStep": 1
+    },
+    {
+        "projektname": "Ventilator bauen",
+        "beschreibung": "ein kleiner Ventilator von ca. 180x180x80mm³",
+        "SchritteString": "grobe Konstruktion,Model überarbeiten,Motor bestellen,BLDC Motortreiber bestellen,Arduino programmieren,zusammenbauen",
+        "progress": 33,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "grobe Konstruktion",
+                "done": true
+            },
+            {
+                "title": "Model überarbeiten",
+                "done": false
+            },
+            {
+                "title": "Motor bestellen",
+                "done": true
+            },
+            {
+                "title": "BLDC Motortreiber bestellen",
+                "done": false
+            },
+            {
+                "title": "Arduino programmieren",
+                "done": false
+            },
+            {
+                "title": "zusammenbauen",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Selbstbewässerungsanlage",
+        "beschreibung": "Ein automatisiertes System um Hauspflanzen zu bewässern",
+        "SchritteString": "programm schreiben,programm überarbeiten,teile bestellen,zusammenbauen,Gehäuse konstruieren,drucken,Cover für Sensor machen,testen",
+        "progress": 38,
+        "marked": true,
+        "subtasks": [
+            {
+                "title": "programm schreiben",
+                "done": true
+            },
+            {
+                "title": "programm überarbeiten",
+                "done": false
+            },
+            {
+                "title": "teile bestellen",
+                "done": true
+            },
+            {
+                "title": "zusammenbauen",
+                "done": true
+            },
+            {
+                "title": "Gehäuse konstruieren",
+                "done": false
+            },
+            {
+                "title": "drucken",
+                "done": false
+            },
+            {
+                "title": "Cover für Sensor machen",
+                "done": false
+            },
+            {
+                "title": "testen",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Jalousie Projekt",
+        "beschreibung": "ein kleines Projekt, welches mich befähigt eine Jalousie remote ein und aus zu fahren",
+        "SchritteString": "Teile bestellen,konstruieren,ESP32/RPi programmieren,MQTT aufsetzen,node-red dashboard/gui erstellen",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Teile bestellen",
+                "done": false
+            },
+            {
+                "title": "konstruieren",
+                "done": false
+            },
+            {
+                "title": "ESP32/RPi programmieren",
+                "done": false
+            },
+            {
+                "title": "MQTT aufsetzen",
+                "done": false
+            },
+            {
+                "title": "node-red dashboard/gui erstellen",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "3D-Drucker reparieren",
+        "beschreibung": "Luftzufürung fällt die ganze Zeit ab",
+        "SchritteString": "Slicer Einstellungen,Luftzuführung ankleben",
+        "progress": 100,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Slicer Einstellungen",
+                "done": true
+            },
+            {
+                "title": "Luftzuführung ankleben",
+                "done": true
+            }
+        ]
+    },
+    {
+        "projektname": "Projektverwaltung",
+        "beschreibung": "verschiedene Projektverwaltungen",
+        "SchritteString": "normal,npm pkg als exe,npm electron-node-red als exe",
+        "progress": 100,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "normal",
+                "done": true
+            },
+            {
+                "title": "npm pkg als exe",
+                "done": true
+            },
+            {
+                "title": "npm electron-node-red als exe",
+                "done": true
+            },
+            {
+                "title": "Als .bat",
+                "done": true
+            },
+            {
+                "title": "mit puppeteer Library",
+                "done": true
+            },
+            {
+                "title": "mit electron",
+                "done": true
+            }
+        ],
+        "activeStep": 2
+    },
+    {
+        "projektname": "Wdhl Studium",
+        "beschreibung": "alles jeden Tag 30min wdhl",
+        "SchritteString": "ET,IP,IMA,AMA",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "ET",
+                "done": false
+            },
+            {
+                "title": "IP",
+                "done": false
+            },
+            {
+                "title": "IMA",
+                "done": false
+            },
+            {
+                "title": "AMA",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Luftqualitätschecker",
+        "beschreibung": "Ein ESP32 der mit Hilfe eines CO2 Sensors die Luftqualität misst und Maßnahmen empfiehlt",
+        "SchritteString": "ESP32 kaufen,CO2 Sensor kaufen (ENS 160),LCD Bildschirm?,Gehäuse konstruieren,drucken,https://fmh-studios.de/esp32/co2-sensor-ens160-esp32-tutorial/,Code schreiben,MQTT Client auf ESP,Broker auf RPi4B,node-red flow für MQTT,Handy MQTT Client",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "ESP32 kaufen",
+                "done": false
+            },
+            {
+                "title": "CO2 Sensor kaufen (ENS 160)",
+                "done": false
+            },
+            {
+                "title": "LCD Bildschirm?",
+                "done": false
+            },
+            {
+                "title": "Gehäuse konstruieren",
+                "done": false
+            },
+            {
+                "title": "drucken",
+                "done": false
+            },
+            {
+                "title": "https://fmh-studios.de/esp32/co2-sensor-ens160-esp32-tutorial/",
+                "done": false
+            },
+            {
+                "title": "Code schreiben",
+                "done": false
+            },
+            {
+                "title": "MQTT Client auf ESP",
+                "done": false
+            },
+            {
+                "title": "Broker auf RPi4B",
+                "done": false
+            },
+            {
+                "title": "node-red flow für MQTT",
+                "done": false
+            },
+            {
+                "title": "Handy MQTT Client",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "USB Hub",
+        "beschreibung": "Einen USB Hub kaufen, damit du deine ganzen Projekte irgendwo anschließen kannst",
+        "SchritteString": "",
+        "progress": 100,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "USB Hub kaufen",
+                "done": true
+            }
+        ]
+    },
+    {
+        "projektname": "Octoprint",
+        "beschreibung": "zum Überwachen und scheiße vom 3D Drucker",
+        "SchritteString": "RPi3B+ kaufen,SD-Karte kaufen,Octoprint installieren,???",
+        "progress": 75,
+        "marked": true,
+        "subtasks": [
+            {
+                "title": "RPi3B+ kaufen",
+                "done": true
+            },
+            {
+                "title": "SD-Karte kaufen",
+                "done": true
+            },
+            {
+                "title": "Octoprint installieren",
+                "done": true
+            },
+            {
+                "title": "RPi Gehäuse konstruieren",
+                "done": true
+            },
+            {
+                "title": "Gehäuse drucken",
+                "done": true
+            },
+            {
+                "title": "Extensions installieren und ausprobieren",
+                "done": false
+            },
+            {
+                "title": "Druckbettgröße korrigieren",
+                "done": true
+            },
+            {
+                "title": "Webcam integrieren",
+                "done": false
+            }
+        ],
+        "activeStep": 8
+    },
+    {
+        "projektname": "handwriting synthesis",
+        "beschreibung": "Ein GitHub Projekt was ein Neuronales Netzwerk auf meine Handschrift trainieren soll",
+        "SchritteString": "",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Doku durchlesen",
+                "done": false
+            },
+            {
+                "title": "eigenes Set an Handschrift einfügen",
+                "done": false
+            },
+            {
+                "title": "nachschauen wie das funktioniert",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Llama",
+        "beschreibung": "Ein eigenes Llama 3 Modell lokal auf meine Handschrift trainieren",
+        "SchritteString": "Llama ziehen,auf Handschrift trainieren,einfach so allgemein machen",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Llama ziehen",
+                "done": false
+            },
+            {
+                "title": "auf Handschrift trainieren",
+                "done": false
+            },
+            {
+                "title": "einfach so allgemein machen",
+                "done": false
+            }
+        ],
+        "activeStep": 1
+    },
+    {
+        "projektname": "Bitaufnahme Smalcalda",
+        "beschreibung": "Schraubendreher Smalcalda verwendbar machen",
+        "SchritteString": "Bitaufnahme konstruieren,Modell überarbeiten,verschiedene Varianten drucken,auf Torsion testen,Smalcalda reparieren :(",
+        "progress": 100,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Bitaufnahme konstruieren",
+                "done": true
+            },
+            {
+                "title": "Modell überarbeiten",
+                "done": true
+            },
+            {
+                "title": "verschiedene Varianten drucken",
+                "done": true
+            },
+            {
+                "title": "auf Torsion testen",
+                "done": true
+            },
+            {
+                "title": "Smalcalda reparieren :(",
+                "done": true
+            }
+        ],
+        "activeStep": 5
+    },
+    {
+        "projektname": "Torsionsprüfstand",
+        "beschreibung": "Eine kleine Vorrichtung, welche mit einem Motor Torsionskräfte auf Testkörker auswirkt und die Kraft plottet (siehe Zugversuch)",
+        "SchritteString": "ESP kaufen, Motor aussuchen und bestellen (Stepper?),Vorrichtung konstruieren,bauen,Gehäuse drucken,Dashboard erstellen (Chart für Versuche, Historie, etc.)",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "ESP kaufen",
+                "done": false
+            },
+            {
+                "title": " Motor aussuchen und bestellen (Stepper?)",
+                "done": false
+            },
+            {
+                "title": "Vorrichtung konstruieren",
+                "done": false
+            },
+            {
+                "title": "bauen",
+                "done": false
+            },
+            {
+                "title": "Gehäuse drucken",
+                "done": false
+            },
+            {
+                "title": "Dashboard erstellen (Chart für Versuche",
+                "done": false
+            },
+            {
+                "title": "Drehmoment messen mit Dehnmessstreifen",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Kleiner Node-RED Server",
+        "beschreibung": "Ein Raspberry Pi Zero der die Node RED Projektverwaltung hostet und die ganze Zeit am Netz hängt (Server halt)",
+        "SchritteString": "RPi 0,SD-Karte,OS installieren,Node-Red installieren,Gehäuse drucken",
+        "progress": 40,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "RPi 0",
+                "done": true
+            },
+            {
+                "title": "SD-Karte",
+                "done": true
+            },
+            {
+                "title": "OS installieren",
+                "done": false
+            },
+            {
+                "title": "Gehäuse drucken",
+                "done": false
+            },
+            {
+                "title": "Node RED installieren https://nodered.org/docs/getting-started/raspberrypi",
+                "done": false
+            }
+        ]
+    },
+    {
+        "projektname": "Docker Desktop",
+        "beschreibung": "",
+        "SchritteString": "Install,Install WSL https://learn.microsoft.com/en-us/windows/wsl/install,Maybe enable Virtualization in BIOS https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/topics/#docker-desktop-fails-due-to-virtualization-not-working,get some images",
+        "progress": 100,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "Install",
+                "done": true
+            },
+            {
+                "title": "Install WSL https://learn.microsoft.com/en-us/windows/wsl/install",
+                "done": true
+            },
+            {
+                "title": "Maybe enable Virtualization in BIOS https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/topics/#docker-desktop-fails-due-to-virtualization-not-working",
+                "done": true
+            },
+            {
+                "title": "get some images",
+                "done": true
+            },
+            {
+                "title": "Just make sure you have everything https://docs.docker.com/desktop/setup/install/windows-install/",
+                "done": true
+            }
+        ],
+        "activeStep": 1
+    },
+    {
+        "projektname": "Ben Geschenk",
+        "beschreibung": "",
+        "SchritteString": "konstruieren,drucken,fertiges nehmen?",
+        "progress": 0,
+        "marked": false,
+        "subtasks": [
+            {
+                "title": "konstruieren",
+                "done": false
+            },
+            {
+                "title": "drucken",
+                "done": false
+            },
+            {
+                "title": "fertiges nehmen?",
+                "done": false
+            }
+        ]
+    }
+]
